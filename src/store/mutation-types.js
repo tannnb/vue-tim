@@ -1,0 +1,5 @@
+export const SET_AUTH_SUCCESS = 'SET_AUTH_SUCCESS'
+export const SET_ERROR_MSG = 'SET_ERROR_MSG'
+
+
+
