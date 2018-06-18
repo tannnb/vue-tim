@@ -25,6 +25,7 @@
 </template>
 
 <script>
+  import {mapActions,mapGetters} from 'vuex'
   import Fade from '../../components/Fade/Fade'
   import Logo from '../../components/Logo/Logo'
   import NavBar from '../../components/NavBar/NavBar'
@@ -47,10 +48,14 @@
       Logo,
       NavBar
     },
+    computed:{
+      ...mapGetters(['initState'])
+    },
     methods: {
+      ...mapActions(['login']),
       showToastType() {
         this.$createToast({
-          txt: '账号密码不能为空',
+          txt: '账号或密码不能为空',
           time: 1500,
           type: 'warn'
         }).show()
@@ -60,6 +65,14 @@
           this.showToastType()
           return false
         }
+        this.login({
+          user:this.model.User,
+          pwd:this.model.Pwd,
+        }).then(res => {
+          this.$router.push({path: this.initState.redirectTo})
+        }).catch(err => {
+          console.log(err)
+        })
       },
       HandlerRegister() {
         this.$router.push({path: '/register'})

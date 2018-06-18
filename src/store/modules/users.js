@@ -1,5 +1,6 @@
 import * as types from '../mutation-types'
 import axios from 'axios'
+import {getRedirectPath} from '../../util/util'
 
 const state = {
   initState: {}
@@ -15,10 +16,20 @@ const getters = {
 //mutations
 const mutations = {
   [types.SET_AUTH_SUCCESS](state, payload) {
-    state.initState = {...state.initState, isAuth: true, msg: '', ...payload}
+    state.initState = {
+      ...state.initState,
+      redirectTo: getRedirectPath(payload.data),
+      isAuth: true,
+      msg: payload.msg,
+      ...payload.data
+    }
   },
-  [types.SET_ERROR_MSG](state, msg) {
-    state.initState = {...state.initState, isAuth: false, msg}
+  [types.SET_ERROR_MSG](state, payload) {
+    state.initState = {
+      ...state.initState,
+      isAuth: false,
+      msg: payload.msg
+    }
   }
 }
 
@@ -31,7 +42,6 @@ const actions = {
     return new Promise((resolve, reject) => {
       axios.get('/api/user/info').then(res => {
         if (res.status === 200 && res.data.code === 0) {
-          // 有登陆信息
           resolve(res.data.code)
         } else {
           reject(res.data.code)
@@ -46,11 +56,26 @@ const actions = {
       axios.post('/api/user/register', {user, pwd, type})
         .then(res => {
           if (res.status === 200 && res.data.code === 0) {
-            commit('SET_AUTH_SUCCESS', {user, pwd, type})
+            resolve(res.data)
+            commit('SET_AUTH_SUCCESS', res.data)
+          } else {
+            reject(res.data)
+            commit('SET_ERROR_MSG', res.data)
+          }
+        })
+    })
+  },
+
+  login({commit, state}, {user, pwd}) {
+    return new Promise((resolve, reject) => {
+      axios.post('/api/user/login', {user, pwd})
+        .then(res => {
+          if (res.status && res.data.code === 0) {
+            commit('SET_AUTH_SUCCESS', res.data.data)
+            resolve(res.data)
           } else {
             commit('SET_ERROR_MSG', res.data.msg)
           }
-          resolve(res.data)
         })
         .catch(err => {
           reject(err)

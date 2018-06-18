@@ -115,7 +115,7 @@
           pwd: this.model.Pwd,
           type: this.model.type
         }).then(res => {
-         this.showToastType(res.msg, 'correct')
+          this.showToastType(res.msg, 'correct')
           this.model = {
             User: '',
             Pwd: '',
@@ -123,14 +123,10 @@
             type: 'boss',
           }
           setTimeout(() => {
-            this.$router.push({path: getRedirectPath(this.initState.type)})
-          },1500)
+            this.$router.push({path: this.initState.redirectTo})
+          }, 1500)
         }).catch(err => {
           this.showToastType(err.msg, 'error')
-          this.model = {
-            User: '',
-            type: 'boss',
-          }
         })
       }
     }
