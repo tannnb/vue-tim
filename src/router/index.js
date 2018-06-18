@@ -32,9 +32,25 @@ const routers = new Router({
       }
     },
     {
+      path: '/geniusInfo',
+      name: 'geniusInfo',
+      component: () => import('@/views/geniusInfo/geniusInfo'),
+      meta: {
+        requireAuth: true
+      }
+    },
+    {
       path: '/boss',
       name: 'boss',
       component: () => import('@/views/boss/boss'),
+      meta: {
+        requireAuth: true
+      }
+    },
+    {
+      path: '/bossinfo',
+      name: 'bossInfo',
+      component: () => import('@/views/bossInfo/bossInfo'),
       meta: {
         requireAuth: true
       }
@@ -50,13 +66,16 @@ routers.beforeEach((to, from, next) => {
     // 如果已经是登录或者注册页面，不需要请求
     const publicList = ['/login', '/register']
     if (publicList.indexOf(to.fullPath) > -1) {
+      console.log('ok')
       next()
       return;
     }
 
     store.dispatch('authRoute').then(res => {
+      console.log(res)
       next()
     }).catch(err => {
+      console.log(err)
       next({path: '/login'})
     })
 

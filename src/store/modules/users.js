@@ -38,13 +38,15 @@ const mutations = {
 const actions = {
 
   // 判断权限
-  authRoute() {
+  authRoute({commit, state}) {
     return new Promise((resolve, reject) => {
       axios.get('/api/user/info').then(res => {
         if (res.status === 200 && res.data.code === 0) {
           resolve(res.data.code)
+          commit('SET_AUTH_SUCCESS', res.data)
         } else {
           reject(res.data.code)
+          commit('SET_ERROR_MSG', res.data)
         }
       })
     })
@@ -71,14 +73,12 @@ const actions = {
       axios.post('/api/user/login', {user, pwd})
         .then(res => {
           if (res.status && res.data.code === 0) {
-            commit('SET_AUTH_SUCCESS', res.data.data)
             resolve(res.data)
+            commit('SET_AUTH_SUCCESS', res.data)
           } else {
-            commit('SET_ERROR_MSG', res.data.msg)
+            reject(res.data)
+            commit('SET_ERROR_MSG', res.data)
           }
-        })
-        .catch(err => {
-          reject(err)
         })
     })
   }

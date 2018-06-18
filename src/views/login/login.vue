@@ -53,16 +53,16 @@
     },
     methods: {
       ...mapActions(['login']),
-      showToastType() {
+      showToastType(text, type = 'warn') {
         this.$createToast({
-          txt: '账号或密码不能为空',
+          txt: text,
           time: 1500,
-          type: 'warn'
+          type
         }).show()
       },
       HandlerSubmit() {
         if (!this.model.User || !this.model.Pwd) {
-          this.showToastType()
+          this.showToastType('账号或密码不能为空')
           return false
         }
         this.login({
@@ -70,8 +70,9 @@
           pwd:this.model.Pwd,
         }).then(res => {
           this.$router.push({path: this.initState.redirectTo})
-        }).catch(err => {
-          console.log(err)
+        })
+        .catch(err => {
+          this.showToastType(err.msg,'error')
         })
       },
       HandlerRegister() {
