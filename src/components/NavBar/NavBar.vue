@@ -30,7 +30,8 @@
 
   .NavBar-wrapper {
     position: relative
-    border-bottom 1px solid #ddd
+    z-index 10
+    border-bottom 1px solid #efefef
     .leftButton{
       position: absolute
       left:0px

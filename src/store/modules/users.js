@@ -68,6 +68,7 @@ const actions = {
     })
   },
 
+  // 登陆
   login({commit, state}, {user, pwd}) {
     return new Promise((resolve, reject) => {
       axios.post('/api/user/login', {user, pwd})
@@ -81,7 +82,24 @@ const actions = {
           }
         })
     })
+  },
+
+  // 更新数据，完善信息
+  update({commit,state},data){
+    return new Promise((resolve,reject) => {
+      axios.post('/api/user/update',data)
+        .then(res => {
+          if (res.status && res.data.code === 0) {
+            resolve(res.data)
+            commit('SET_AUTH_SUCCESS', res.data)
+          } else {
+            reject(res.data)
+            commit('SET_ERROR_MSG', res.data)
+          }
+        })
+    })
   }
+
 }
 
 

@@ -62,6 +62,22 @@ Router.post('/login', function (req, res) {
   })
 })
 
+// 更新并完善信息
+Router.post('/update',function (req,res) {
+  const {userid} = req.cookies
+  if (!userid) {
+    return res.json({code: 1, msg: '登录信息已过期，请重新登陆', data: {}})
+  }
+  const body = req.body
+  User.findByIdAndUpdate(userid,body,function (err,doc) {
+    const data = Object.assign({},{
+      user:doc.user,
+      type:doc.type
+    },body)
+    return res.json({code: 0, msg: '更新成功', data})
+  })
+})
+
 
 function md5Pwd(pwd) {
   // 盐值
