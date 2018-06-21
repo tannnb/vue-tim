@@ -97,7 +97,8 @@
       validateHandler() {
         console.log('ok')
       },
-      submitHandler() {
+      submitHandler(e) {
+        e.preventDefault()
         this.update(this.model)
           .then(res => {
             this.$router.push({path: this.initState.redirectTo})

@@ -22,19 +22,19 @@
         headerTitle:'',
         navList: [
           {
-            path: '/boss/bossContainer',
-            text: '牛人',
+            path: '/genius/geniusContainer',
+            text: 'BOSS',
             icon: 'boss',
-            title: '牛人列表',
+            title: 'BOSS',
           },
           {
-            path: '/boss/msg',
+            path: '/genius/msg',
             text: '消息中心',
             icon: 'msg',
             title: '消息列表'
           },
           {
-            path: '/boss/me',
+            path: '/genius/me',
             text: '个人中心',
             icon: 'user',
             title: '个人中心'
@@ -57,7 +57,9 @@
         immediate:true
       }
     },
+    methods: {
 
+    }
   }
 </script>
 

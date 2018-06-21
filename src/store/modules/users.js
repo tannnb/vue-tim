@@ -30,6 +30,9 @@ const mutations = {
       isAuth: false,
       msg: payload.msg
     }
+  },
+  [types.SET_LOGOUT](state,payload){
+    state.initState = payload
   }
 }
 
@@ -98,6 +101,11 @@ const actions = {
           }
         })
     })
+  },
+
+  // 退出登录
+  logoutSubmit({commit,state}){
+    commit('SET_LOGOUT',{})
   }
 
 }

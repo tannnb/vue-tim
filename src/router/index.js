@@ -32,6 +32,35 @@ const routers = new Router({
       }
     },
     {
+      path: '/genius',
+      name: 'genius',
+      component: () => import('@/views/genius/genius'),
+      meta: {
+        requireAuth: true
+      },
+      redirect:'/genius/geniusContainer',
+      children:[
+        {
+          path:'geniusContainer',
+          name:'geniusContainer',
+          component: () => import('@/container/bossContainer/bossContainer'),
+          meta: {requireAuth: true}
+        },
+        {
+          path:'msg',
+          name:'msg',
+          component: () => import('@/container/msgContainer/msgContainer'),
+          meta: {requireAuth: true}
+        },
+        {
+          path:'me',
+          name:'me',
+          component: () => import('@/container/meContainer/meContainer'),
+          meta: {requireAuth: true}
+        }
+      ]
+    },
+    {
       path: '/geniusInfo',
       name: 'geniusInfo',
       component: () => import('@/views/geniusInfo/geniusInfo'),
@@ -45,7 +74,28 @@ const routers = new Router({
       component: () => import('@/views/boss/boss'),
       meta: {
         requireAuth: true
-      }
+      },
+      redirect:'/boss/bossContainer',
+      children:[
+        {
+          path:'bossContainer',
+          name:'bossContainer',
+          component: () => import('@/container/bossContainer/bossContainer'),
+          meta: {requireAuth: true}
+        },
+        {
+          path:'msg',
+          name:'msg',
+          component: () => import('@/container/msgContainer/msgContainer'),
+          meta: {requireAuth: true}
+        },
+        {
+          path:'me',
+          name:'me',
+          component: () => import('@/container/meContainer/meContainer'),
+          meta: {requireAuth: true}
+        }
+      ]
     },
     {
       path: '/bossinfo',
