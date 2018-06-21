@@ -27,10 +27,7 @@
   import NavBar from '../../components/NavBar/NavBar'
   import InputItem from '../../components/InputItem/InputItem'
   import AvatarSelect from '../../components/x-grid/x-grid'
-<<<<<<< HEAD
 
-=======
->>>>>>> ffba7f6c1f4f36b18d40a07d6612a11fffa757ec
   export default {
     name: "bossInfo",
     data() {
@@ -83,12 +80,8 @@
       validateHandler() {
         console.log('ok')
       },
-<<<<<<< HEAD
       submitHandler(e) {
         e.preventDefault()
-=======
-      submitHandler() {
->>>>>>> ffba7f6c1f4f36b18d40a07d6612a11fffa757ec
         this.update(this.model)
           .then(res => {
             this.$router.push({path: this.initState.redirectTo})
@@ -117,10 +110,6 @@
     width 100%
     overflow hidden
   }
-<<<<<<< HEAD
-
-=======
->>>>>>> ffba7f6c1f4f36b18d40a07d6612a11fffa757ec
   .default-wrapper {
     display flex
     justify-content center
@@ -138,10 +127,6 @@
       }
     }
   }
-<<<<<<< HEAD
-
-=======
->>>>>>> ffba7f6c1f4f36b18d40a07d6612a11fffa757ec
   .cube-form_standard .cube-textarea-wrapper.cube-textarea_expanded {
     height: 90px !important
   }
