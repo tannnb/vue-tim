@@ -110,6 +110,7 @@
     width 100%
     overflow hidden
   }
+
   .default-wrapper {
     display flex
     justify-content center
@@ -127,6 +128,7 @@
       }
     }
   }
+
   .cube-form_standard .cube-textarea-wrapper.cube-textarea_expanded {
     height: 90px !important
   }

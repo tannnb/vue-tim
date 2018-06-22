@@ -104,6 +104,14 @@ const routers = new Router({
       meta: {
         requireAuth: true
       }
+    },
+    {
+      path: '/chat/:user',
+      name: 'chat',
+      component: () => import('@/container/chat/chat'),
+      meta: {
+        requireAuth: true
+      }
     }
   ]
 })
