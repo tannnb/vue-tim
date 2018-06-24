@@ -1,9 +1,9 @@
 <template>
   <div class="chat-wrapper">
-   <!-- <div>用户名：{{this.$store.state.users.initState.user}}</div>
-    <ul>
-      <li v-for="(items) in msgData">{{items.text}}</li>
-    </ul>-->
+    <!-- <div>用户名：{{this.$store.state.users.initState.user}}</div>
+     <ul>
+       <li v-for="(items) in msgData">{{items.text}}</li>
+     </ul>-->
     <div class="inputWrapper">
       <input class="valModel" type="text" v-model="valModel" placeholder="请输入聊天信息">
       <span @click="handleSendMessage" class="send">发送</span>
@@ -13,7 +13,7 @@
 
 <script>
 
-  import {mapActions,mapGetters} from 'vuex'
+  import {mapActions, mapGetters} from 'vuex'
 
   export default {
     name: "chat",
@@ -25,22 +25,23 @@
       }
     },
     created() {
-     // this.getMsgList()
+       this.getMsgList()
     },
     mounted() {
-
+      this.recvmsg()
     },
-    computed:{
+    computed: {
       ...mapGetters(['initState'])
     },
     methods: {
-      ...mapActions(['getMsgList','sendMsg']),
+      ...mapActions(['getMsgList', 'sendMsg','recvmsg']),
       handleSendMessage() {
         this.sendMsg({
-          from:this.initState._id,
-          to:this.$router.history.current.params.id,
-          msg:this.valModel
+          from: this.initState._id,
+          to: this.$router.history.current.params.id,
+          msg: this.valModel
         })
+        this.valModel = ''
       }
     }
   }

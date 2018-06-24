@@ -3,16 +3,21 @@ const app = express()
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const UserRouter = require('./user')
-
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
+const models = require('./model')
+const Chat = models.getModel('chat')
 
 
-io.on('connection',function (socket) {
-  console.log('socket连接成功')
+io.on('connection', function (socket) {
+  // 接受数据
   socket.on('sendMsg', function (data) {
-    console.log(data)
-    //io.emit('recvmsg',data)
+    const {from, to, msg} = data
+    const chatid = [from, to].sort().join('_')
+    Chat.create({chatid, from, to, content: msg}, function (err, doc) {
+      // 广播到全局
+      io.emit('recvmsg', Object.assign({}, doc._doc))
+    })
   });
 })
 

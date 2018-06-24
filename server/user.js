@@ -38,10 +38,9 @@ Router.get('/list', function (req, res) {
 Router.get('/getMsgList',function (req,res) {
   const {userid} = req.cookies
   Chat.find({},function (err,doc) {
-    if(err){
-      return res.json({code:1,msg:'暂无信息',msgs:[]})
+    if(!err){
+      return res.json({code:0,msgs:doc})
     }
-    return res.json({code:0,msg:'获取成功',msgs:doc})
   })
 })
 
