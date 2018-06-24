@@ -8,6 +8,7 @@
       :to="items.path">
       <div class="x-tabber-icon">
         <Svg-icon :iconClass="items.icon"></Svg-icon>
+        <span v-if="items.icon == 'msg'" class="count">{{unread}}</span>
       </div>
       <p class="x-tabber-label">{{items.text}}</p>
     </router-link>
@@ -16,6 +17,7 @@
 
 <script>
   import SvgIcon from '../../components/svg-icon/svg-nav'
+  import {mapGetters} from 'vuex'
 
   export default {
     name: "x-tabbar",
@@ -27,6 +29,9 @@
     },
     components: {
       SvgIcon
+    },
+    computed:{
+      ...mapGetters(['unread'])
     },
     methods: {
       handleSelect(items) {
@@ -69,8 +74,21 @@
       .x-tabber-icon {
         position: relative;
         display: inline-block;
-        width: 27px;
-        height: 27px;
+        width: 28px;
+        height: 28px;
+        .count{
+          position: absolute
+          top: -4px
+          right: -14px
+          display block
+          width 24px
+          height:24px
+          line-height 24px
+          font-size 14px
+          border-radius 50%
+          background #ff6a46
+          color: #fff
+        }
       }
       .x-tabber-label {
         text-align: center;
@@ -78,6 +96,7 @@
         font-size: 10px;
         line-height: 1.8;
       }
+
       &.router-link-exact-active, &.router-link-active {
         .x-tabber-icon {
           svg {

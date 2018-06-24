@@ -2,19 +2,16 @@
   <div class="chat-wrapper">
     <NavBar :title="$router.history.current.params.id"
             :onLeft="true"
-            @handleGoBack="handleGoBack"
-    />
+            @handleGoBack="handleGoBack" />
 
     <div class="containerWrapper">
-
       <cube-scroll :data="chatMsg" ref="scroll">
         <ul  ref="chatWrapper">
           <li
             class="chatItme"
             :class="[$router.history.current.params.id == items.from? 'default':'myItem' ]" v-if="chatMsg"
             v-for="(items,index) in chatMsg"
-            :key="index"
-          >
+            :key="index">
             <span class="avatar"></span>
             <span class="content">{{items.content}}</span>
           </li>

@@ -15,7 +15,8 @@ const state = {
 
 // getters
 const getters = {
-  chatMsg: state => state.initChatMsg.chatMsg
+  chatMsg: state => state.initChatMsg.chatMsg,
+  unread:state => state.initChatMsg.unread
 }
 
 

@@ -12,6 +12,7 @@
 </template>
 
 <script>
+  import {mapActions, mapGetters} from 'vuex'
   import NavBar from '../../components/NavBar/NavBar'
   import Tabber from '../../components/x-tabbar/x-tabbar'
 
@@ -46,6 +47,9 @@
       NavBar,
       Tabber
     },
+    created(){
+      this.getMsgList()
+    },
     watch: {
       $route: {
         handler: function(to, from){
@@ -57,8 +61,8 @@
         immediate:true
       }
     },
-    methods: {
-
+    methods:{
+      ...mapActions(['getMsgList'])
     }
   }
 </script>
