@@ -46,7 +46,7 @@
     methods: {
       ...mapActions(['getUserList']),
       handleSelectItem(items){
-        this.$router.push({path:`/chat/${items.user}`})
+        this.$router.push({path:`/chat/${items._id}`})
       }
     }
   }

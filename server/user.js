@@ -3,6 +3,7 @@ const Router = express.Router()
 const utils = require('utility');
 const models = require('./model')
 const User = models.getModel('user')
+const Chat = models.getModel('chat')
 const _filter = {"pwd": 0, "__v": 0}
 
 // 登陆信息 并 读取客户端cookies
@@ -30,6 +31,17 @@ Router.get('/list', function (req, res) {
       return res.json({code: 1, mag: '暂无用户信息', data: []})
     }
     return res.json({code: 0, mag: '获取成功', data: doc})
+  })
+})
+
+
+Router.get('/getMsgList',function (req,res) {
+  const {userid} = req.cookies
+  Chat.find({},function (err,doc) {
+    if(err){
+      return res.json({code:1,msg:'暂无信息',msgs:[]})
+    }
+    return res.json({code:0,msg:'获取成功',msgs:doc})
   })
 })
 

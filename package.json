@@ -17,6 +17,8 @@
     "cube-ui": "^1.9.8",
     "express": "^4.16.3",
     "mongoose": "^5.1.5",
+    "socket.io": "^2.1.1",
+    "socket.io-client": "^2.1.1",
     "utility": "^1.13.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",

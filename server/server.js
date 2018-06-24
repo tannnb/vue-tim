@@ -10,7 +10,10 @@ const io = require('socket.io')(server)
 
 io.on('connection',function (socket) {
   console.log('socket连接成功')
-  socket.emit('obj1', { hello: 'world' });
+  socket.on('sendMsg', function (data) {
+    console.log(data)
+    //io.emit('recvmsg',data)
+  });
 })
 
 

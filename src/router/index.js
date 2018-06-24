@@ -85,13 +85,11 @@ const routers = new Router({
         },
         {
           path:'msg',
-          name:'msg',
           component: () => import('@/container/msgContainer/msgContainer'),
           meta: {requireAuth: true}
         },
         {
           path:'me',
-          name:'me',
           component: () => import('@/container/meContainer/meContainer'),
           meta: {requireAuth: true}
         }
@@ -106,7 +104,7 @@ const routers = new Router({
       }
     },
     {
-      path: '/chat/:user',
+      path: '/chat/:id',
       name: 'chat',
       component: () => import('@/container/chat/chat'),
       meta: {
